@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="base-uri 'self'; default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'self'; worker-src 'self'; frame-src 'none'; form-action 'self'; manifest-src 'self'"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <title>Developer Logs</title>
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='manifest.json') }}"
+    />
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.png" />
+    <meta name="theme-color" content="" />
+  </head>
+  <body>
+    <div id="offline-banner" class="offline-banner" style="display: none">
+      <p>⚠️ You are currently offline. Showing cached content.</p>
+    </div>
+
+    <button id="install-button" class="install-button" style="display: none">
+      📱 Install App
+    </button>
+
+    <main>
+      {% include "partials/menu.html" %} {% block content %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

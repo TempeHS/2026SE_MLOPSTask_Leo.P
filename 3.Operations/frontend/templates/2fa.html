@@ -1,0 +1,33 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-5" style="width: 100%; max-width: 600px">
+    <h1>Two Factor Authentication</h1>
+    <h4>Scan this QR Code with Google Authenticator</h4>
+    <img
+      src="data:image/png;base64,{{ qr_code }}"
+      class="img-fluid my-4"
+      alt="QR Code"
+    />
+
+    <form action="/2fa.html" method="POST">
+      <div class="form-group mb-3">
+        <label for="otp">Enter the One Time Password from your app:</label
+        ><br />
+        <input
+          type="text"
+          id="otp"
+          name="otp"
+          class="form-control form-control-lg text-center"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          placeholder="000000"
+          required
+          autofocus
+        /><br />
+      </div>
+      <input type="submit" value="Login" class="btn btn-primary w-100" />
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    </form>
+  </div>
+</div>
+{% endblock %}

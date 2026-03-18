@@ -1,0 +1,107 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+  </head>
+  <body>
+    <h1>Welcome, {{ session.user_email }}</h1>
+    <a href="/logout">Logout</a>
+  </body>
+</html> -->
+
+{% extends 'layout.html' %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h1>Logged in as {{ session.user_email }}</h1>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card p-4">
+        <form method="POST" class="row g-3">
+          <div class="col-md-6">
+            <label for="inputDevName" class="form-label">Developer Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputDevName"
+              placeholder="e.g. Leo Projceski"
+              name="dev_name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputProjName" class="form-label">Project Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputProjName"
+              placeholder="e.g. 2026SE-Task1"
+              name="project_name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputDateTime" class="form-label">Start Time</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="inputDateTime"
+              name="start_time"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputDateTime2" class="form-label">End Time</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="inputDateTime2"
+              name="end_time"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputTimeWorked" class="form-label">Time Worked</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputTimeWorked"
+              placeholder="e.g. 1.5 hours (Note: Time Worked must be in increments of .5)"
+              name="time_worked"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputRepo" class="form-label">Repository</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputRepo"
+              placeholder="e.g. https://github.com/TempeHS/2026SE_Task1_Leo.P"
+              name="repository"
+              required
+            />
+          </div>
+          <div class="col-12">
+            <label for="inputNotes" class="form-label">Notes</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="inputNotes"
+              name="notes"
+            ></textarea>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

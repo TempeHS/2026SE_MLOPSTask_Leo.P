@@ -1,0 +1,29 @@
+-- database: ./database.db
+
+-- CREATE TABLE id7-tusers(id INTEGER PRIMARY KEY autoincrement,username TEXT NOT NULL UNIQUE, password TEXT NOT NULL);
+
+-- INSERT INTO id7-tusers(username,password) VALUES ("","");
+
+-- SELECT * FROM extension;
+
+CREATE TABLE IF NOT EXISTS "user_info" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "email"	TEXT NOT NULL UNIQUE,
+    "password"	TEXT NOT NULL
+);
+
+DELETE FROM user_info WHERE email = "leoleolego1@gmail.com";
+
+CREATE TABLE IF NOT EXISTS "dev_logs" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_email" TEXT NOT NULL,
+    "dev_name" TEXT NOT NULL,
+    "project_name" TEXT NOT NULL,
+    "start_time" TEXT NOT NULL,
+    "end_time" TEXT NOT NULL,
+    "time_worked" TEXT NOT NULL,
+    "repository" TEXT NOT NULL,
+    "notes" TEXT,
+    "time_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
