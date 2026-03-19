@@ -125,19 +125,29 @@ def predict():
     try:
         input_value = float(request.form["input_value"])
 
+        # Scaled km_from_cbd
+        MIN_KM_FROM_CBD = 0.15
+        MAX_KM_FROM_CBD = 100
+        scaled_input = (input_value - MIN_KM_FROM_CBD) / (
+            MAX_KM_FROM_CBD - MIN_KM_FROM_CBD
+        )
+
         # Transform input using polynomial features before predicting
-        input_array = np.array([[input_value]])
+        input_array = np.array([[scaled_input]])
         poly_input = loaded_poly.transform(input_array)
         prediction = loaded_model.predict(poly_input)
         result = round(float(prediction[0]), 2)
 
         # Generate graph
-        x_range = np.linspace(0, 10, 200).reshape(-1, 1)
-        x_range_poly = loaded_poly.transform(x_range)
+        x_range_scaled = np.linspace(0, 1, 200).reshape(-1, 1)
+        x_range_km = (
+            x_range_scaled * (MAX_KM_FROM_CBD - MIN_KM_FROM_CBD) + MIN_KM_FROM_CBD
+        )
+        x_range_poly = loaded_poly.transform(x_range_scaled)
         y_range = loaded_model.predict(x_range_poly)
 
         plt.figure(figsize=(10, 5))
-        plt.plot(x_range, y_range, label="Model Prediction Line")
+        plt.plot(x_range_km, y_range, label="Model Prediction Line")
         plt.scatter(
             [input_value],
             [result],
