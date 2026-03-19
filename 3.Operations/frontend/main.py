@@ -154,11 +154,14 @@ def predict():
             color="red",
             zorder=5,
             s=100,
-            label=f"Your Input ({input_value} km → ${result:,.0f})",
+            label=f"Your Input ({input_value} km ≈ ${result:,.0f})",
         )
-        plt.title("Property Price vs Distance from CBD")
+        plt.title("Property prices in relation to property distance from CBD")
         plt.xlabel("Distance from CBD (km)")
-        plt.ylabel("Predicted Price ($)")
+        plt.ylabel("Predicted Price (AUD)")
+        plt.gca().yaxis.set_major_formatter(
+            plt.matplotlib.ticker.FuncFormatter(lambda x, _: f"${x:,.0f}")
+        )
         plt.legend()
         plt.tight_layout()
 

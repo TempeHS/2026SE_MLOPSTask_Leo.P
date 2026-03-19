@@ -24,9 +24,11 @@
   <div class="row justify-content-center mt-4">
     <div class="col-lg-10">
       <div class="card p-4 mb-4">
-        <h3 class="card-title">AI Prediction</h3>
+        <h3 class="card-title">Property Price Prediction</h3>
         <p class="text-muted">
-          Enter a value to get a prediction from the trained model.
+          Find out the estimated value of a property in the Greater Sydney Area
+          based on the property's distance from the CBD (Central Business
+          District).
         </p>
         <form method="POST" action="/predict" class="row g-3">
           <div class="col-md-8">
@@ -46,15 +48,16 @@
             />
           </div>
           <div class="col-md-4 d-flex align-items-end">
-            <button type="submit" class="btn btn-success w-100">Predict</button>
+            <button type="submit" class="btn btn-primary w-100">Predict</button>
           </div>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         </form>
 
         {% if prediction is not none %}
-        <div class="alert alert-success mt-3">
-          <strong>Prediction Result:</strong> Input
-          <code>{{ input_value }} km</code> → <code>{{ prediction }}</code>
+        <div class="alert alert-primary mt-3">
+          <strong>Prediction Result:</strong> A distance of
+          <code>{{ input_value }}km</code> ≈
+          <code>${{ prediction }}</code>
         </div>
         {% endif %} {% if graph %}
         <div class="mt-3">
