@@ -38,7 +38,6 @@ logging.basicConfig(
     format="%(asctime)s %(message)s",
 )
 
-# Generate a unique basic 16 key: https://acte.ltd/utils/randomkeygen
 app = Flask(__name__)
 app.secret_key = b"_53oi3uriq9pifpff;apl"
 
@@ -132,13 +131,11 @@ def predict():
             MAX_KM_FROM_CBD - MIN_KM_FROM_CBD
         )
 
-        # Transform input using polynomial features before predicting
         input_array = np.array([[scaled_input]])
         poly_input = loaded_poly.transform(input_array)
         prediction = loaded_model.predict(poly_input)
         result = round(float(prediction[0]), 2)
 
-        # Generate graph
         x_range_scaled = np.linspace(0, 1, 200).reshape(-1, 1)
         x_range_km = (
             x_range_scaled * (MAX_KM_FROM_CBD - MIN_KM_FROM_CBD) + MIN_KM_FROM_CBD
